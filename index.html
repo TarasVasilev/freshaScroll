@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', Sans-Serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+      font-weight: 500;
+    }
+
+    .content {
+      width: 400px;
+      margin: 15px 30px;
+    }
+
+    .titles {
+      position: sticky;
+      top: 0;
+      background-color: #fff;
+      right: 0;
+      left: 0;
+      padding: 10px;
+      box-shadow: 0 0 25px #00000026;
+    }
+
+    .titles > * {
+      display: flex;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .titles > * > * {
+      white-space: nowrap;
+      background: #fff;
+      color: #000;
+      border-radius: 15px;
+      padding: 5px 20px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .titles > * > *:hover {
+      background: #e4e4e4;
+    }
+
+    .titles > * > .active {
+      background: #000;
+      color: #fff;
+    }
+
+    .blocks {
+      scrollbar-color: #cacdd2 #e8e5ec;
+      scrollbar-width: thin;
+      margin: 10px 5px;
+    }
+
+    .blocks > * {
+      margin-bottom: 15px;
+    }
+
+    .blocks .title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 5px 5px;
+    }
+
+    .blocks .description {
+      font-size: .85rem;
+      font-weight: 500;
+      text-align: justify;
+    }
+
+    /* TODO */
+    .to-left,
+    .to-right {
+      display: none;
+      background: #f00;
+      position: absolute;
+      border-radius: 0;
+    }
+
+    .to-left {
+      left: 10px;
+    }
+
+    .to-right {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content"></div>
+
+  <script>
+    const blocks = [
+      {
+        title: 'Header 01',
+        description: '...'
+      },
+      {
+        title: 'Header 02',
+        description: '...'
+      },
+      {
+        title: 'Header 03',
+        description: '...'
+      },
+      {
+        title: 'Header 04',
+        description: '...'
+      },
+      {
+        title: 'Header 05',
+        description: '...'
+      },
+      {
+        title: 'Header 06',
+        description: '...'
+      },
+      {
+        title: 'Header 07',
+        description: '...'
+      },
+      {
+        title: 'Header 08',
+        description: '...'
+      },
+      {
+        title: 'Header 09',
+        description: '...'
+      },
+      {
+        title: 'Header 10',
+        description: '...'
+      }
+    ];
+
+    blocks.map((item, idx) => item.id = idx);
+
+    blocks.map((item) => item.description = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim totam magnam voluptate deserunt ea hic ducimus eos? Repellendus aspernatur, eveniet nisi ipsa iusto rem. Autem cum mollitia alias quos consectetur. Nesciunt adipisci nam commodi inventore quisquam recusandae repellat, at iusto dolore tempore, molestiae nihil corrupti suscipit reiciendis, libero ratione sit explicabo voluptatibus eos tempora fugiat minus id facere? Id, aut. Nostrum, repellendus amet. Nemo, eaque culpa! Quisquam harum, impedit voluptate quaerat blanditiis sed a atque dolorum natus minus in explicabo soluta, eos debitis sequi veniam totam illum facere optio nesciunt? Tempore praesentium mollitia sint ducimus harum temporibus quae modi animi odit deserunt dolore quam, sequi excepturi eum molestias iure repudiandae libero, minima voluptas aut deleniti eaque itaque? Eum, inventore voluptatem. Assumenda quo, numquam enim est culpa blanditiis soluta cumque impedit odit, delectus, alias veritatis ex libero hic porro. Repudiandae in ab delectus maiores error optio esse dolorum aperiam, debitis fugiat. Sunt maiores nulla quos quae error corporis quisquam, officia dolorem, fugit vitae optio et consequatur perferendis rerum! Officiis, ipsam nesciunt porro eveniet ad numquam? Omnis saepe repellendus id ipsa laboriosam? Quaerat quo eius officiis, natus quibusdam labore adipisci aspernatur voluptate cupiditate, beatae necessitatibus reiciendis minus velit quasi inventore voluptas. Officia porro distinctio eos nihil architecto, minima quia quae laboriosam voluptas. Distinctio ipsum atque autem totam. Animi facilis numquam officia, cum id eveniet debitis, dolor fuga doloremque sit mollitia cumque odio! Perferendis similique amet cumque natus consequuntur quam ratione odit nobis! Pariatur perferendis dolores veniam, nostrum delectus laboriosam quibusdam, minus magni consequatur laudantium modi, tenetur ratione nulla minima illum. Aliquid voluptatibus quos ut labore perspiciatis corrupti accusamus, dolor nulla minima eveniet? Cupiditate, dolorem. Hic, eos, est necessitatibus labore corrupti impedit quisquam blanditiis animi, sequi sed nostrum provident autem officiis error ipsa fugiat. Porro earum itaque architecto odit praesentium veniam, quaerat commodi.');
+
+    const titlesHtml = blocks.map((item, idx) => `<div data-id="${idx}">${item.title}</div>`);
+    const blocksHtml = blocks.map((item, idx) => `<div data-id="${idx}">
+        <div class="title">${item.title}</div>
+        <div class="description">${item.description}</div>
+      </div>`);
+
+    document.querySelector('.content').innerHTML = `
+      <div class="titles">
+        <div>
+          ${titlesHtml.join('')}
+          <div class="to-left"></div>
+          <div class="to-right"></div>
+        </div>
+      </div>
+      <div class="blocks">${blocksHtml.join('')}</div>
+    `;
+
+    /* TODO :: вычислить динамически */
+    const marginBottom = 10;
+
+    let ticking = false;
+
+    function setActiveTitlePosition() {
+      const currentPosition = document.querySelector('.titles > *').scrollLeft;
+      const activePosition = document.querySelector('.titles > * > .active').getBoundingClientRect().left;
+      const titlesBlockPosition = document.querySelector('.titles > *').getBoundingClientRect().left;
+
+      document.querySelector('.titles > *').scrollTo({
+        left: activePosition - titlesBlockPosition + currentPosition,
+        behavior: 'smooth',
+      });
+    }
+
+    function scrollHandler(event = {}) {
+      const titlesElem = document.querySelector('.titles');
+      const activeElem = titlesElem.querySelector('.active');
+
+      if (!activeElem) {
+        return;
+      }
+
+      const selectedId = activeElem.dataset.id;
+      const titlesBottom = titlesElem.getBoundingClientRect().bottom + marginBottom;
+
+      const selected = {
+        id: selectedId,
+        position: 0
+      };
+
+      document.querySelectorAll('.blocks > *').forEach((elem) => {
+        const position = elem.getBoundingClientRect().top - titlesBottom;
+
+        if (position < marginBottom) {
+          selected.id = elem.dataset.id;
+          selected.position = position;
+        }
+      });
+
+      if (selectedId !== selected.id) {
+        document.querySelector(`.titles > * > .active`).classList.remove('active');
+        document.querySelector(`.titles > * > [data-id="${selected.id}"]`).classList.add('active');
+
+        setTimeout(setActiveTitlePosition, 50);
+      }
+    }
+
+    // # УСТАНОВКА АКТИВНОГО TITLE В ЗАВИСИМОСТИ ОТ ПОЗИЦИИ
+    const selected = {
+      id: 0,
+      position: 0
+    };
+
+    document.querySelectorAll('.blocks > *').forEach((elem) => {
+      const headerBottom = document.querySelector('.titles').getBoundingClientRect().bottom + marginBottom;
+
+      const position = elem.getBoundingClientRect().top - headerBottom;
+
+      if (position < marginBottom) {
+        selected.id = elem.dataset.id;
+        selected.position = position;
+      }
+    });
+
+    document.querySelector(`.titles > * > [data-id="${selected.id}"]`).classList.add('active');
+
+    setTimeout(setActiveTitlePosition, 50);
+
+    // # EVENT :: ПРОКРУТКА СТРАНИЦЫ
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame((event) => {
+          scrollHandler(event);
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    }, true);
+
+    // # EVENT :: КЛИК ПО TITLE
+    document.querySelector('.titles').addEventListener('click', (event) => {
+      const id = event.target?.dataset.id;
+
+      if (id) {
+        const pagePosition = window.pageYOffset;
+        const activeTopPosition = document.querySelector(`.blocks [data-id="${id}"]`).getBoundingClientRect().top;
+        const titlesElem = document.querySelector('.titles');
+        const titlesBottomLinePosition = titlesElem.getBoundingClientRect().bottom - (titlesElem.getBoundingClientRect().bottom - titlesElem.clientHeight);
+
+        window.scrollTo({
+          top: activeTopPosition + pagePosition - (titlesBottomLinePosition + marginBottom),
+          behavior: 'smooth'
+        });
+      }
+    });
+  </script>
+</body>
+</html>
